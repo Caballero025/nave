@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://t8qd0sgwb8e4"]
+
+[ext_resource type="Script" path="res://bala.gd" id="1_r2jyi"]
+[ext_resource type="Texture2D" uid="uid://ll662xw12mco" path="res://Recursos/bala2.png" id="2_ongod"]
+[ext_resource type="Texture2D" uid="uid://13ejk0044n2h" path="res://Recursos/bala.png" id="3_hv4cx"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_poxng"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ongod")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_hv4cx")
+}],
+"loop": true,
+"name": &"bala",
+"speed": 20.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rq6ki"]
+radius = 2.0
+height = 36.0
+
+[node name="Bala" type="Area2D"]
+script = ExtResource("1_r2jyi")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(484.5, 361.75)
+scale = Vector2(0.075, 0.176301)
+sprite_frames = SubResource("SpriteFrames_poxng")
+animation = &"bala"
+frame_progress = 0.567467
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(485, 360)
+shape = SubResource("CapsuleShape2D_rq6ki")
