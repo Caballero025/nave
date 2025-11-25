@@ -14,8 +14,7 @@
 # Exported builds
 export/
 bin/
-build/*
-!build/html5/
+build/
 
 # Mono (si no usas C#)
 .mono/
