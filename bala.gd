@@ -1,6 +1,6 @@
 extends Area2D
 
-var velocidad = 800
+var velocidad = 3000
 
 func _process(delta):
 	position.y -= velocidad * delta  # Mueve la bala hacia arriba
