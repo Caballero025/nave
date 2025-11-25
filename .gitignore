@@ -1,0 +1,20 @@
+# Godot-specific ignores
+.godot/
+.import/
+*.import
+
+# Backups
+*.tmp
+*.log
+*.old
+*.backup
+*.bak
+*~
+
+# Exported builds
+export/
+bin/
+build/
+
+# Mono (si no usas C#)
+.mono/
