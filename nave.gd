@@ -4,7 +4,9 @@ extends Area2D
 @export var speed: int = 100
 var mov = Vector2()
 var limite
-
+var num: int = 0
+var esc: int = 0
+var p = 0
 @onready var spawn_point: Marker2D = $Muzzle
 @onready var spawn_poi: Marker2D = $Muzzle_izq
 
@@ -12,28 +14,55 @@ func _process(delta: float) -> void:
 	mov = Vector2.ZERO
 	
 	if Input.is_action_pressed("ui_right"):
-		mov.x += 1
-		speed = 800
-		$sprite.animation = "arriba"
-		$sprite.play() 
+		if esc == 0:
+			mov.x += 1
+			speed = 1000
+			$sprite.animation = "arriba"
+			$sprite.play()
+		else:
+			mov.x += 1
+			speed = 1000
+			$sprite.animation = "arri_escu"
+		
 	if not (Input.is_action_pressed("ui_up") or Input.is_action_pressed("ui_down") or Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")):
-		mov.y += 1
-		speed = 200
-		$sprite.animation = "detenido"
+		if esc == 0:
+			mov.y += 1
+			speed = 200
+			$sprite.animation = "detenido"
+			$sprite.play()
+		else: 
+			mov.y += 1
+			speed = 200
+			$sprite.animation = "dete_escudo"
 	if Input.is_action_pressed("ui_left"):
-		mov.x -= 1
-		speed = 800
-		$sprite.animation = "arriba"
-		$sprite.play() 
+		if esc == 0:
+			mov.x -= 1
+			speed = 1000
+			$sprite.animation = "arriba"
+			$sprite.play()
+		else:
+			mov.x -= 1
+			speed = 1000
+			$sprite.animation = "arri_escu"
+		
 	if Input.is_action_pressed("ui_down"):
 		mov.y += 1
-		speed = 800
+		speed = 1000
 
 	if Input.is_action_pressed("ui_up"):
-		mov.y -= 1
-		speed = 800
-		$sprite.animation = "arriba"
-		$sprite.play() 
+		if esc == 0:
+			mov.y -= 1
+			speed = 1000
+			$sprite.animation = "arriba"
+			$sprite.play()
+		else:
+			mov.y -= 1
+			speed = 1000
+			$sprite.animation = "arri_escu"
+			
+
+
+			
 
 	if mov.length() > 0:
 		mov = mov.normalized() * speed
@@ -43,7 +72,22 @@ func _process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("disparar"):
-		disparar()
+		if esc == 0:
+			disparar()
+		
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			if num == 0:
+				esc = 1
+				$sprite.animation= "escudo"
+				$sprite.play()
+				num = 1
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			if num == 1:
+				num = 0
+				$sprite.animation = "no_escudo"
+				$sprite.play()
+				esc = 0
 
 func disparar() -> void:
 	for muzzle in [$Muzzle_izq, $Muzzle]:
@@ -54,6 +98,7 @@ func disparar() -> void:
 
 func _ready() -> void:
 	limite = get_viewport_rect().size
+	
 
 	
 	
