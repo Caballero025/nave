@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://bi5re0bhh201g"]
+
+[ext_resource type="Script" path="res://mundo.gd" id="1_2mptn"]
+
+[sub_resource type="Curve2D" id="Curve2D_y78dc"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1152, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1152, 0)
+}
+point_count = 5
+
+[node name="mundo" type="Node2D"]
+script = ExtResource("1_2mptn")
+
+[node name="PowerTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="PowerPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_y78dc")
+
+[node name="PowerSpawnPoint" type="PathFollow2D" parent="PowerPath"]
+
+[connection signal="timeout" from="PowerTimer" to="." method="_on_power_timer_timeout"]
