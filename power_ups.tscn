@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://sk7u5axn5h2k"]
+
+[ext_resource type="Texture2D" uid="uid://c7x5o3ggrol73" path="res://Recursos/Power-ups/0001.png" id="1_ise2w"]
+[ext_resource type="Script" path="res://power_ups.gd" id="1_rbrfs"]
+[ext_resource type="Texture2D" uid="uid://d008hjl5yvim6" path="res://Recursos/Power-ups/0002.png" id="2_mt7cw"]
+[ext_resource type="Texture2D" uid="uid://bwyk6cfn4cpju" path="res://Recursos/Power-ups/0003.png" id="3_g57uo"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fetm4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ise2w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_ise2w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_ise2w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_mt7cw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_g57uo")
+}],
+"loop": true,
+"name": &"power",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qtfls"]
+size = Vector2(86.9375, 64.2188)
+
+[node name="RigidBody2D" type="RigidBody2D" groups=["powerups"]]
+collision_mask = 0
+script = ExtResource("1_rbrfs")
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(199.75, 87.8749)
+scale = Vector2(0.16276, 0.161343)
+sprite_frames = SubResource("SpriteFrames_fetm4")
+animation = &"power"
+frame_progress = 0.307667
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(179, 97)
+shape = SubResource("RectangleShape2D_qtfls")

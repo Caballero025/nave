@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="juevo_nave"
-run/main_scene="res://nave.tscn"
+run/main_scene="res://mundo.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 

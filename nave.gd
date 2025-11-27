@@ -98,8 +98,10 @@ func disparar() -> void:
 
 func _ready() -> void:
 	limite = get_viewport_rect().size
-	
 
-	
-	
 		
+func _on_body_entered(body):
+	if body.is_in_group("powerups"):
+		var direction = (body.global_position - global_position).normalized()
+		var impulse = direction * 300  
+		body.apply_impulse(impulse)
