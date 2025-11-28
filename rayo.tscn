@@ -1,0 +1,63 @@
+[gd_scene load_steps=12 format=3 uid="uid://csls50d3nqybi"]
+
+[ext_resource type="Texture2D" uid="uid://c2a6njg3otguc" path="res://Recursos/Power-ups/Rayo/0001.png" id="1_18tyi"]
+[ext_resource type="Texture2D" uid="uid://c4q3su5f56e0m" path="res://Recursos/Power-ups/Rayo/0003.png" id="1_guk5c"]
+[ext_resource type="Script" path="res://rayo.gd" id="1_wa3h4"]
+[ext_resource type="Texture2D" uid="uid://bq2b4jy5jhfb7" path="res://Recursos/Power-ups/Rayo/0004.png" id="3_kl1sq"]
+[ext_resource type="Texture2D" uid="uid://b83oymubcl2qu" path="res://Recursos/Power-ups/Rayo/0005.png" id="4_r830h"]
+[ext_resource type="Texture2D" uid="uid://0ry7curgofo2" path="res://Recursos/Power-ups/Rayo/0006.png" id="5_wqyyk"]
+[ext_resource type="Texture2D" uid="uid://bkumaqdtcpls8" path="res://Recursos/Power-ups/Rayo/0007.png" id="6_gdx4n"]
+[ext_resource type="Texture2D" uid="uid://c2yrpxa0owv8" path="res://Recursos/Power-ups/Rayo/0008.png" id="7_jxhew"]
+[ext_resource type="Texture2D" uid="uid://c7hhgvxqevyxs" path="res://Recursos/Power-ups/Rayo/0009.png" id="8_l4k0q"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_unv7a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_18tyi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_guk5c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_kl1sq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_r830h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_wqyyk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_gdx4n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_jxhew")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_l4k0q")
+}],
+"loop": true,
+"name": &"rayo",
+"speed": 25.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nn4c7"]
+radius = 40.0
+height = 656.0
+
+[node name="Rayo" type="Area2D"]
+script = ExtResource("1_wa3h4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(32, -304)
+scale = Vector2(0.432292, 0.602778)
+sprite_frames = SubResource("SpriteFrames_unv7a")
+animation = &"rayo"
+frame_progress = 0.100211
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, -320)
+shape = SubResource("CapsuleShape2D_nn4c7")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

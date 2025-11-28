@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://cd1fhjy33gpbn"]
+
+[ext_resource type="Texture2D" uid="uid://b8beytku8150a" path="res://Recursos/Power-ups/Rayo/targeta/rayo.png" id="1_4kb10"]
+[ext_resource type="Script" path="res://tarjeta.gd" id="1_eui33"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5e5n3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_4kb10")
+}],
+"loop": true,
+"name": &"targeta",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5dxcl"]
+size = Vector2(50, 58)
+
+[node name="tarjeta" type="RigidBody2D" groups=["tarjeta"]]
+script = ExtResource("1_eui33")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(81.75, 51.5)
+scale = Vector2(0.0893574, 0.0843195)
+sprite_frames = SubResource("SpriteFrames_5e5n3")
+animation = &"targeta"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(82, 52)
+shape = SubResource("RectangleShape2D_5dxcl")
