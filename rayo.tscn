@@ -43,21 +43,21 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nn4c7"]
-radius = 40.0
-height = 656.0
+radius = 72.0
+height = 1376.0
 
 [node name="Rayo" type="Area2D"]
 script = ExtResource("1_wa3h4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(32, -304)
-scale = Vector2(0.432292, 0.602778)
+position = Vector2(56, -680)
+scale = Vector2(0.766406, 1.31366)
 sprite_frames = SubResource("SpriteFrames_unv7a")
 animation = &"rayo"
 frame_progress = 0.100211
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(8, -320)
+position = Vector2(16, -688)
 shape = SubResource("CapsuleShape2D_nn4c7")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
