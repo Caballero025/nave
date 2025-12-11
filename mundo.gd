@@ -5,18 +5,25 @@ extends Node2D
 @onready var player_scene := preload("res://nave.tscn")
 @onready var meteor_scene := preload("res://meteoro.tscn")
 @onready var GameOverScene = preload("res://game_over.tscn")
+@onready var barra_vida = preload("res://barra_vida.tscn")
 
 var player   # <--- AQUÍ guardamos el jugador
 var last_positions: Array = []
+var barra
 
 func _ready():
-	spawn_player()
+	barra = barra_vida.instantiate()
+	barra.position = Vector2(10, 80)
+	add_child(barra)
 
-func spawn_player():
+	# Instanciar nave
 	player = player_scene.instantiate()
 	player.position = Vector2(240, 400)
 	add_child(player)
-	player.connect("died", Callable(self, "_on_nave_died"))
+
+	# PASAR LA INSTANCIA de la barra a la nave
+	player.set_barra_vida(barra)
+	player.connect("died", Callable(self, "_on_died"))
 
 
 
@@ -70,11 +77,9 @@ func _on_meteor_timer_timeout():
 
 		add_child(meteor)
 
-	
-func _on_nave_died():
-	print("Nave destruida, instanciando Game Over")
-	# Crear instancia
+func _on_died() -> void:
+	print("¡La nave murió!")
 	var game_over = GameOverScene.instantiate()
-	
-	# Agregar como hijo a la escena principal
-	add_child(game_over)
+	get_tree().root.get_child(0).queue_free()  # elimina la escena actual
+	get_tree().root.add_child(game_over)       # agrega Game Over  # Godot 4: funciona si GameOverScene es PackedScene
+ # o cualquier otra acción
