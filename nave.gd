@@ -126,6 +126,8 @@ func disparar() -> void:
 			bala_instance.global_position = muzzle.global_position
 			bala_instance.rotation = muzzle.global_rotation
 			get_parent().add_child(bala_instance)
+			bala_instance.connect("meteoro_destruido", Callable(get_tree().current_scene.get_node("puntaje"), "_on_meteoro_destruido"))
+
 
 	elif arm == 1:
 		# Rayo (solo se crea cuando comienza a disparar)
@@ -134,6 +136,7 @@ func disparar() -> void:
 			rayo_instance.global_position = $Muzzlerarayo.global_position
 			rayo_instance.rotation = $Muzzlerarayo.global_rotation
 			get_parent().add_child(rayo_instance)
+			rayo_instance.connect("meteoro_destruido", Callable(get_tree().current_scene.get_node("puntaje"), "_on_meteoro_destruido"))
 
 
 func _ready() -> void:
@@ -170,7 +173,7 @@ func set_barra_vida(barra):
 	
 func recibir_daño(dano):
 	vida -= dano
-	if vida <= 0:
+	if vida < 0:
 		print("Emitir died")  # ✅ depuración
 		vida = 0
 		emit_signal("died")  

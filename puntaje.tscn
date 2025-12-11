@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://esiyj0no5n7h"]
+
+[ext_resource type="Script" path="res://puntaje.gd" id="1_gqx3n"]
+[ext_resource type="FontFile" uid="uid://c6ikyl7x47jyd" path="res://fuentes/PixelOperator8-Bold.ttf" id="2_psi1e"]
+
+[node name="puntaje" type="Node2D"]
+script = ExtResource("1_gqx3n")
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_right = 88.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("2_psi1e")
+theme_override_font_sizes/font_size = 80
+text = "0"
