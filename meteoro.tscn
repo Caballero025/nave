@@ -1,0 +1,71 @@
+[gd_scene load_steps=14 format=3 uid="uid://rk7mvy3y0bub"]
+
+[ext_resource type="Script" path="res://meteoro.gd" id="1_mxu10"]
+[ext_resource type="Texture2D" uid="uid://blllesyjjrdwf" path="res://Recursos/Meteoro/0009.png" id="10_kb0uw"]
+[ext_resource type="Texture2D" uid="uid://hrt2gsc8w2l" path="res://Recursos/Meteoro/0010.png" id="11_kg5yn"]
+[ext_resource type="Texture2D" uid="uid://cswchqgy2t3ql" path="res://Recursos/Meteoro/0011.png" id="12_sopqd"]
+[ext_resource type="Texture2D" uid="uid://bfablnh7roqw0" path="res://Recursos/Meteoro/0012.png" id="13_l5pmn"]
+[ext_resource type="Texture2D" uid="uid://b061b36kqiase" path="res://Recursos/Meteoro/0013.png" id="14_x4er8"]
+[ext_resource type="Texture2D" uid="uid://b8osjo5jgicnc" path="res://Recursos/Meteoro/0014.png" id="15_plx6x"]
+[ext_resource type="Texture2D" uid="uid://xgkm6nnu5tpj" path="res://Recursos/Meteoro/0015.png" id="16_20vf8"]
+[ext_resource type="Texture2D" uid="uid://c3f4jlmaf6ns7" path="res://Recursos/Meteoro/0020.png" id="17_iavbp"]
+[ext_resource type="Texture2D" uid="uid://3yrn5evf1vps" path="res://Recursos/Meteoro/0017.png" id="18_cxo8v"]
+[ext_resource type="Texture2D" uid="uid://bitv0ibqn87md" path="res://Recursos/Meteoro/0018.png" id="19_3ynow"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6hp6d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_kb0uw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_kg5yn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_iavbp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_cxo8v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_3ynow")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_sopqd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_l5pmn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_x4er8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_plx6x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_20vf8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wfi8p"]
+radius = 48.0
+
+[node name="meteoro" type="RigidBody2D" groups=["meteor"]]
+script = ExtResource("1_mxu10")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(97.8056, 131)
+scale = Vector2(0.214786, 0.201852)
+sprite_frames = SubResource("SpriteFrames_6hp6d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(88, 144)
+shape = SubResource("CircleShape2D_wfi8p")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

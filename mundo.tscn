@@ -4,7 +4,7 @@
 
 [sub_resource type="Curve2D" id="Curve2D_y78dc"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1152, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1152, 0)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2216, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1152, 0)
 }
 point_count = 5
 
@@ -19,5 +19,11 @@ autostart = true
 curve = SubResource("Curve2D_y78dc")
 
 [node name="PowerSpawnPoint" type="PathFollow2D" parent="PowerPath"]
+rotation = 0.00361009
+
+[node name="MeteorTimer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
 
 [connection signal="timeout" from="PowerTimer" to="." method="_on_power_timer_timeout"]
+[connection signal="timeout" from="MeteorTimer" to="." method="_on_meteor_timer_timeout"]

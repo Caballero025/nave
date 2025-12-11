@@ -1,5 +1,6 @@
 extends Area2D
 
+signal died 
 @export var bala_scene: PackedScene = preload("res://bala.tscn")
 @export var rayo_scene: PackedScene = preload("res://rayo.tscn")
 @export var speed: int = 100
@@ -147,7 +148,10 @@ func _on_body_entered(body):
 		arm = 1
 		body.queue_free()
 		poder_rayo()
-		
+  
+	if body.is_in_group("meteor"):
+		print("Meteoro tocó la nave")
+		emit_signal("died")
 func poder_rayo():
 	await get_tree().create_timer(5.0).timeout
 	eliminar_rayo()

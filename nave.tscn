@@ -1,6 +1,5 @@
-[gd_scene load_steps=36 format=3 uid="uid://btcy6i5c3wmq7"]
+[gd_scene load_steps=35 format=3 uid="uid://btcy6i5c3wmq7"]
 
-[ext_resource type="Texture2D" uid="uid://c855ncfee47vc" path="res://Recursos/0012.png" id="1_qk6xe"]
 [ext_resource type="Script" path="res://nave.gd" id="1_r4row"]
 [ext_resource type="Texture2D" uid="uid://b4sk7aehfbgl1" path="res://Recursos/0022.png" id="2_5hhsq"]
 [ext_resource type="Texture2D" uid="uid://ko1p5kse5q0x" path="res://Recursos/Escudo/0048.png" id="3_3s1wh"]
@@ -14,12 +13,12 @@
 [ext_resource type="Texture2D" uid="uid://cksfpdu6fqqkm" path="res://Recursos/0030.png" id="9_vgtd5"]
 [ext_resource type="Texture2D" uid="uid://b5im0e6f1l22d" path="res://Recursos/0031.png" id="10_8il10"]
 [ext_resource type="Texture2D" uid="uid://bk6gm75e25by8" path="res://Recursos/0032.png" id="11_qi7kf"]
-[ext_resource type="Texture2D" uid="uid://cie0te42pbnnb" path="res://Recursos/0001.png" id="13_trqai"]
 [ext_resource type="Texture2D" uid="uid://be1tvtd1445la" path="res://Recursos/Escudo/0047.png" id="13_vla3e"]
 [ext_resource type="Texture2D" uid="uid://buwx80cxfbrrc" path="res://Recursos/Escudo/0030.png" id="13_xk14g"]
 [ext_resource type="Texture2D" uid="uid://cgkf6wr4ivr8w" path="res://Recursos/Escudo/0031.png" id="14_4mgog"]
 [ext_resource type="Texture2D" uid="uid://bgyikvefvp5eo" path="res://Recursos/Escudo/0032.png" id="15_ms2e8"]
 [ext_resource type="Texture2D" uid="uid://crjediusru0vi" path="res://Recursos/Escudo/0033.png" id="16_3ikbe"]
+[ext_resource type="Texture2D" uid="uid://y2riwyr1od28" path="res://nave/det.png" id="16_8isse"]
 [ext_resource type="Texture2D" uid="uid://cx4vo1saf0r6y" path="res://Recursos/Escudo/0000.png" id="16_q032y"]
 [ext_resource type="Texture2D" uid="uid://b0bsclcf6g5su" path="res://Recursos/Escudo/0034.png" id="17_tnya1"]
 [ext_resource type="Texture2D" uid="uid://dtxd4drxnae63" path="res://Recursos/Escudo/0035.png" id="18_dk2kf"]
@@ -51,9 +50,6 @@ animations = [{
 "speed": 15.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_qk6xe")
-}, {
 "duration": 1.0,
 "texture": ExtResource("2_5hhsq")
 }, {
@@ -98,7 +94,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_trqai")
+"texture": ExtResource("16_8isse")
 }],
 "loop": true,
 "name": &"detenido",
@@ -215,7 +211,7 @@ animations = [{
 radius = 36.57
 height = 140.17
 
-[node name="nave" type="Area2D"]
+[node name="nave" type="Area2D" groups=["nave"]]
 position = Vector2(129, 156)
 script = ExtResource("1_r4row")
 speed = 800
@@ -225,7 +221,7 @@ metadata/_edit_group_ = true
 position = Vector2(6.79, -3.515)
 scale = Vector2(0.201465, 0.186111)
 sprite_frames = SubResource("SpriteFrames_yau4w")
-animation = &"no_escudo"
+animation = &"arri_escu"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-11.57, -11.085)

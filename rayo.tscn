@@ -1,14 +1,14 @@
 [gd_scene load_steps=12 format=3 uid="uid://csls50d3nqybi"]
 
-[ext_resource type="Texture2D" uid="uid://c2a6njg3otguc" path="res://Recursos/Power-ups/Rayo/0001.png" id="1_18tyi"]
-[ext_resource type="Texture2D" uid="uid://c4q3su5f56e0m" path="res://Recursos/Power-ups/Rayo/0003.png" id="1_guk5c"]
+[ext_resource type="Texture2D" uid="uid://c2a6njg3otguc" path="res://Recursos/Power-ups/tarjeta/0001.png" id="1_18tyi"]
+[ext_resource type="Texture2D" uid="uid://c4q3su5f56e0m" path="res://Recursos/Power-ups/tarjeta/0003.png" id="1_guk5c"]
 [ext_resource type="Script" path="res://rayo.gd" id="1_wa3h4"]
-[ext_resource type="Texture2D" uid="uid://bq2b4jy5jhfb7" path="res://Recursos/Power-ups/Rayo/0004.png" id="3_kl1sq"]
-[ext_resource type="Texture2D" uid="uid://b83oymubcl2qu" path="res://Recursos/Power-ups/Rayo/0005.png" id="4_r830h"]
-[ext_resource type="Texture2D" uid="uid://0ry7curgofo2" path="res://Recursos/Power-ups/Rayo/0006.png" id="5_wqyyk"]
-[ext_resource type="Texture2D" uid="uid://bkumaqdtcpls8" path="res://Recursos/Power-ups/Rayo/0007.png" id="6_gdx4n"]
-[ext_resource type="Texture2D" uid="uid://c2yrpxa0owv8" path="res://Recursos/Power-ups/Rayo/0008.png" id="7_jxhew"]
-[ext_resource type="Texture2D" uid="uid://c7hhgvxqevyxs" path="res://Recursos/Power-ups/Rayo/0009.png" id="8_l4k0q"]
+[ext_resource type="Texture2D" uid="uid://bq2b4jy5jhfb7" path="res://Recursos/Power-ups/tarjeta/0004.png" id="3_kl1sq"]
+[ext_resource type="Texture2D" uid="uid://b83oymubcl2qu" path="res://Recursos/Power-ups/tarjeta/0005.png" id="4_r830h"]
+[ext_resource type="Texture2D" uid="uid://0ry7curgofo2" path="res://Recursos/Power-ups/tarjeta/0006.png" id="5_wqyyk"]
+[ext_resource type="Texture2D" uid="uid://bkumaqdtcpls8" path="res://Recursos/Power-ups/tarjeta/0007.png" id="6_gdx4n"]
+[ext_resource type="Texture2D" uid="uid://c2yrpxa0owv8" path="res://Recursos/Power-ups/tarjeta/0008.png" id="7_jxhew"]
+[ext_resource type="Texture2D" uid="uid://c7hhgvxqevyxs" path="res://Recursos/Power-ups/tarjeta/0009.png" id="8_l4k0q"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_unv7a"]
 animations = [{
