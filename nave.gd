@@ -3,6 +3,7 @@ extends Area2D
 signal died 
 @export var bala_scene: PackedScene = preload("res://bala.tscn")
 @export var rayo_scene: PackedScene = preload("res://rayo.tscn")
+@export var GameOverScene: PackedScene = preload("res://game_over.tscn")
 @export var speed: int = 100
 var mov = Vector2()
 var limite
@@ -12,10 +13,15 @@ var p = 0
 var arm = 0
 var rayo_instance: Node2D = null
 var disparando_rayo := false
-
+var barra_vida = null  # referencia a la barra de vida
+var vida = 100
 @onready var spawn_point: Marker2D = $Muzzle
 @onready var spawn_poi: Marker2D = $Muzzle_izq
 
+
+
+
+	
 func _process(delta: float) -> void:
 	mov = Vector2.ZERO
 	
@@ -151,8 +157,22 @@ func _on_body_entered(body):
   
 	if body.is_in_group("meteor"):
 		print("Meteoro tocó la nave")
-		emit_signal("died")
+		recibir_daño(25)
+		
 func poder_rayo():
 	await get_tree().create_timer(5.0).timeout
 	eliminar_rayo()
 	arm = 0
+	
+func set_barra_vida(barra):
+	barra_vida = barra
+	
+	
+func recibir_daño(dano):
+	vida -= dano
+	if vida <= 0:
+		print("Emitir died")  # ✅ depuración
+		vida = 0
+		emit_signal("died")  
+	if barra_vida != null:
+		barra_vida.actualizar_vida(vida)

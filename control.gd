@@ -16,4 +16,5 @@ func _process(delta: float) -> void:
 	
 
 func _on_button_pressed() -> void:
-	get_tree().reload_current_scene()
+	get_tree().root.get_child(0).queue_free()  # elimina la escena actual
+	get_tree().change_scene_to_file("res://mundo.tscn")

@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3 uid="uid://p66tm04p8q1y"]
+
+[ext_resource type="Script" path="res://barra_vida.gd" id="1_fbogt"]
+[ext_resource type="Texture2D" uid="uid://bufdnam4b6h37" path="res://Recursos/Barra_vida/VIDA_10.png" id="1_t6564"]
+[ext_resource type="Texture2D" uid="uid://cb8dv7x7wdfvc" path="res://Recursos/Barra_vida/VIDA_1.png" id="2_hlvpf"]
+[ext_resource type="Texture2D" uid="uid://s3ovk0v5uta2" path="res://Recursos/Barra_vida/VIDA_4.png" id="3_7jwgq"]
+[ext_resource type="Texture2D" uid="uid://cah24xknkhatx" path="res://Recursos/Barra_vida/VIDA_6.png" id="4_wr7fs"]
+[ext_resource type="Texture2D" uid="uid://8j5qumtr0oxs" path="res://Recursos/Barra_vida/VIDA_3.png" id="5_esu41"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o1yqk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_hlvpf")
+}],
+"loop": true,
+"name": &"vida_10",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_esu41")
+}],
+"loop": true,
+"name": &"vida_25",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_7jwgq")
+}],
+"loop": true,
+"name": &"vida_50",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_wr7fs")
+}],
+"loop": true,
+"name": &"vida_75",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_t6564")
+}],
+"loop": false,
+"name": &"vida_full",
+"speed": 5.0
+}]
+
+[node name="barra" type="Node2D"]
+script = ExtResource("1_fbogt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(40, 490.534)
+rotation = 1.5708
+scale = Vector2(1.62151, 1)
+sprite_frames = SubResource("SpriteFrames_o1yqk")
+animation = &"vida_full"
