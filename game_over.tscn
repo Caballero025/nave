@@ -1,0 +1,45 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmik83gl4dayh"]
+
+[ext_resource type="Script" path="res://control.gd" id="1_81bpe"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 39.0
+offset_top = 42.0
+offset_right = 39.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_81bpe")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 159.0
+offset_top = 114.0
+offset_right = 1014.0
+offset_bottom = 438.0
+color = Color(0.497964, 0.481706, 0.592115, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 246.0
+offset_top = 146.0
+offset_right = 722.0
+offset_bottom = 211.0
+scale = Vector2(1.35203, 1.34011)
+text = "GAME OVER
+"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 447.0
+offset_top = 281.0
+offset_right = 647.0
+offset_bottom = 326.0
+text = "Reiniciar"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
