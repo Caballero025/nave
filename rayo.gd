@@ -1,6 +1,7 @@
 extends Area2D
 
 var explosion = preload("res://explosion.tscn")
+signal meteoro_destruido
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$AnimatedSprite2D.animation = "rayo"
@@ -15,7 +16,8 @@ func _on_body_entered(body):
 		body.queue_free()
 		var explo = explosion.instantiate()
 		explo.global_position = pos
-		get_tree().current_scene.add_child(explo) 
+		get_tree().current_scene.add_child(explo)
+		emit_signal("meteoro_destruido") 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

@@ -3,7 +3,7 @@ extends Area2D
 var velocidad = 3500
 var tarjeta_scene = preload("res://tarjeta.tscn")
 var explosion = preload("res://explosion.tscn")
-
+signal meteoro_destruido
 
 func _process(delta):
 	position.y -= velocidad * delta  
@@ -15,11 +15,20 @@ func _on_Bala_body_entered(body):
 func _on_body_entered(body):
 	var pos = body.global_position
 	if body.is_in_group("meteor"):
+		if body.has_meta("taken"):
+			return
+		
+		body.set_meta("taken", true)
+	
+
+		# Desactiva colisión mientras se procesa
+		$CollisionShape2D.set_deferred("disabled", true)
 		body.queue_free()
 		var explo = explosion.instantiate()
 		explo.global_position = pos
 		get_tree().current_scene.add_child(explo) 
 		queue_free()
+		emit_signal("meteoro_destruido")
 	
 	elif body.is_in_group("powerups"):
 		print("Chocó powerup")

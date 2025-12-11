@@ -6,12 +6,20 @@ extends Node2D
 @onready var meteor_scene := preload("res://meteoro.tscn")
 @onready var GameOverScene = preload("res://game_over.tscn")
 @onready var barra_vida = preload("res://barra_vida.tscn")
+@onready var score = preload("res://puntaje.tscn")
 
-var player   # <--- AQUÍ guardamos el jugador
+
+var player 
 var last_positions: Array = []
 var barra
+var scor
 
 func _ready():
+	
+	scor = score.instantiate()
+	scor.position = Vector2(1050, 30)
+	add_child(scor)
+	
 	barra = barra_vida.instantiate()
 	barra.position = Vector2(10, 80)
 	add_child(barra)
