@@ -21,7 +21,7 @@ func _on_meteoro_destruido():
 		return  # No enviar mientras haya otra petición en proceso
 	score_enviandose = true
 
-	var url = "http://127.0.0.1:8000/actualizar_score"
+	var url = "http://24.199.73.160/actualizar_score"
 	var datos = {"nombre": Global.usuario, "score": score}
 	var json_body = JSON.stringify(datos)
 	var error = http_score.request(url, ["Content-Type: application/json"], HTTPClient.METHOD_POST, json_body)
