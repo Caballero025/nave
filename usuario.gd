@@ -15,7 +15,7 @@ func enviar_usuario():
 	if usuario == "":
 		return
 	
-	var url = "http://24.199.73.160/guardar_usuario"
+	var url = "/api/guardar_usuario"
 	var datos = {"nombre": usuario}
 	var json_body = JSON.stringify(datos)
 	var headers = ["Content-Type: application/json"]
