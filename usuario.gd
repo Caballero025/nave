@@ -15,7 +15,9 @@ func enviar_usuario():
 	if usuario == "":
 		return
 	
-	var url = "/api/guardar_usuario"
+	# CAMBIAR ESTA LÍNEA:
+	var url = "https://juego.caballero026.me/api/guardar_usuario"
+	
 	var datos = {"nombre": usuario}
 	var json_body = JSON.stringify(datos)
 	var headers = ["Content-Type: application/json"]
