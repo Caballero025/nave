@@ -60,7 +60,7 @@ func _ready():
 	
 func registrar_usuario():
 	usuario_actual = Global.usuario
-	var url = "http://127.0.0.1:8000/login_usuario"
+	var url = "http://24.199.73.160/login_usuario"
 	var datos = {"nombre": usuario_actual}
 	var json_body = JSON.stringify(datos)
 	http.request(url, ["Content-Type: application/json"], HTTPClient.METHOD_POST, json_body)
@@ -69,7 +69,7 @@ func registrar_usuario():
 func _ping_usuario():
 	if usuario_actual != "" and not ping_en_proceso:
 		ping_en_proceso = true
-		var url = "http://127.0.0.1:8000/ping_usuario"
+		var url = "http://24.199.73.160/ping_usuario"
 		var datos = {"nombre": usuario_actual}
 		var json_body = JSON.stringify(datos)
 		var error = http_ping.request(url, ["Content-Type: application/json"], HTTPClient.METHOD_POST, json_body)
@@ -84,7 +84,7 @@ func actualizar_usuarios_online():
 	if is_requesting_users:
 		return # todavía está procesando
 	is_requesting_users = true
-	http_users.request("http://127.0.0.1:8000/usuarios_online", [], HTTPClient.METHOD_GET)
+	http_users.request("http://24.199.73.160/usuarios_online", [], HTTPClient.METHOD_GET)
 
 func _on_http_users_request_completed(result, response_code, headers, body):
 	is_requesting_users = false
@@ -103,12 +103,12 @@ func _on_http_users_request_completed(result, response_code, headers, body):
 
 func cerrar_juego():
 	if usuario_actual != "":
-		var url = "http://127.0.0.1:8000/logout_usuario"
+		var url = "http://24.199.73.160/logout_usuario"
 		var datos = {"nombre": usuario_actual}
 		var json_body = JSON.stringify(datos)
 		http.request(url, ["Content-Type: application/json"], HTTPClient.METHOD_POST, json_body)
 func obtener_usuarios():
-	var url = "http://127.0.0.1:8000/usuarios"  # tu API
+	var url = "http://24.199.73.160/usuarios"  # tu API
 	var error = http.request(url, [], HTTPClient.METHOD_GET)
 	if error != OK:
 		print("❌ Error al pedir usuarios:", error)
