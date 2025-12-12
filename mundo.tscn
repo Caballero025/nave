@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bi5re0bhh201g"]
+[gd_scene load_steps=5 format=3 uid="uid://bi5re0bhh201g"]
 
 [ext_resource type="Script" path="res://mundo.gd" id="1_2mptn"]
+[ext_resource type="FontFile" uid="uid://brwtbihgrgk6w" path="res://fuentes/PixelOperatorSC-Bold.ttf" id="2_1do32"]
+[ext_resource type="FontFile" uid="uid://c6ikyl7x47jyd" path="res://fuentes/PixelOperator8-Bold.ttf" id="2_if4e5"]
 
 [sub_resource type="Curve2D" id="Curve2D_y78dc"]
 _data = {
@@ -25,5 +27,24 @@ rotation = 0.00361009
 wait_time = 0.3
 autostart = true
 
+[node name="Label" type="Label" parent="."]
+offset_left = 1688.0
+offset_top = 32.0
+offset_right = 1960.0
+offset_bottom = 83.0
+theme_override_fonts/font = ExtResource("2_1do32")
+theme_override_font_sizes/font_size = 50
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="usuario" type="Label" parent="."]
+offset_left = 88.0
+offset_top = 16.0
+offset_right = 440.0
+offset_bottom = 77.0
+theme_override_fonts/font = ExtResource("2_if4e5")
+theme_override_font_sizes/font_size = 40
+
 [connection signal="timeout" from="PowerTimer" to="." method="_on_power_timer_timeout"]
 [connection signal="timeout" from="MeteorTimer" to="." method="_on_meteor_timer_timeout"]
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]

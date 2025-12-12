@@ -7,15 +7,36 @@ extends Node2D
 @onready var GameOverScene = preload("res://game_over.tscn")
 @onready var barra_vida = preload("res://barra_vida.tscn")
 @onready var score = preload("res://puntaje.tscn")
-
-
+@onready var http = $HTTPRequest
+@onready var http_ping = HTTPRequest.new()
+@onready var http_users = HTTPRequest.new()
+var usuario_actual = ""
+var timer_ping = Timer.new()
 var player 
 var last_positions: Array = []
 var barra
 var scor
-
+var is_requesting_users = false
+var timer_users = Timer.new()
+var ping_en_proceso = false
 func _ready():
-	
+	add_child(http_ping)
+	add_child(http_users)
+	http_ping.request_completed.connect(_on_http_ping_request_completed)
+	http_users.request_completed.connect(_on_http_users_request_completed) 
+	timer_ping.wait_time = 2
+	timer_ping.one_shot = false
+	timer_ping.autostart = true
+	timer_ping.connect("timeout", Callable(self, "_ping_usuario"))
+	timer_users.wait_time = 1
+	timer_users.one_shot = false
+	timer_users.autostart = true
+	timer_users.connect("timeout", Callable(self, "actualizar_usuarios_online"))
+	add_child(timer_users)
+	add_child(timer_ping)
+	if Global.usuario != "":
+		$usuario.text = "Bienvenido, " + Global.usuario
+		registrar_usuario()
 	scor = score.instantiate()
 	scor.position = Vector2(1050, 30)
 	add_child(scor)
@@ -33,8 +54,67 @@ func _ready():
 	player.set_barra_vida(barra)
 	player.connect("died", Callable(self, "_on_died"))
 
+	
+
+	
+	
+func registrar_usuario():
+	usuario_actual = Global.usuario
+	var url = "http://127.0.0.1:8000/login_usuario"
+	var datos = {"nombre": usuario_actual}
+	var json_body = JSON.stringify(datos)
+	http.request(url, ["Content-Type: application/json"], HTTPClient.METHOD_POST, json_body)
+	print("Usuario registrado:", Global.usuario)
+
+func _ping_usuario():
+	if usuario_actual != "" and not ping_en_proceso:
+		ping_en_proceso = true
+		var url = "http://127.0.0.1:8000/ping_usuario"
+		var datos = {"nombre": usuario_actual}
+		var json_body = JSON.stringify(datos)
+		var error = http_ping.request(url, ["Content-Type: application/json"], HTTPClient.METHOD_POST, json_body)
+		if error != OK:
+			ping_en_proceso = false
+			print("Error al enviar ping:", error)
+
+func _on_http_ping_request_completed(result, response_code, headers, body):
+	ping_en_proceso = false
+
+func actualizar_usuarios_online():
+	if is_requesting_users:
+		return # todavía está procesando
+	is_requesting_users = true
+	http_users.request("http://127.0.0.1:8000/usuarios_online", [], HTTPClient.METHOD_GET)
+
+func _on_http_users_request_completed(result, response_code, headers, body):
+	is_requesting_users = false
+	if response_code == 200:
+		var usuarios = JSON.parse_string(body.get_string_from_utf8())
+		if typeof(usuarios) == TYPE_ARRAY:
+			var texto = "Usuarios en línea:\n"
+			for u in usuarios:
+				texto += u.get("nombre", "N/A") + " - " + str(u.get("score", 0)) + "\n"
+			$Label.text = texto
+		else:
+			print("❌ Error: JSON no es un array")
+	else:
+		print("❌ Error HTTP:", response_code)
 
 
+func cerrar_juego():
+	if usuario_actual != "":
+		var url = "http://127.0.0.1:8000/logout_usuario"
+		var datos = {"nombre": usuario_actual}
+		var json_body = JSON.stringify(datos)
+		http.request(url, ["Content-Type: application/json"], HTTPClient.METHOD_POST, json_body)
+func obtener_usuarios():
+	var url = "http://127.0.0.1:8000/usuarios"  # tu API
+	var error = http.request(url, [], HTTPClient.METHOD_GET)
+	if error != OK:
+		print("❌ Error al pedir usuarios:", error)
+
+
+	
 func _on_power_timer_timeout():
 	var power = power_scene.instantiate()
 	var spawn_point = $PowerPath/PowerSpawnPoint
@@ -87,7 +167,9 @@ func _on_meteor_timer_timeout():
 
 func _on_died() -> void:
 	print("¡La nave murió!")
-	var game_over = GameOverScene.instantiate()
-	get_tree().root.get_child(0).queue_free()  # elimina la escena actual
-	get_tree().root.add_child(game_over)       # agrega Game Over  # Godot 4: funciona si GameOverScene es PackedScene
+	# No eliminar nada directo en este callback de colisión
+	call_deferred("_cambiar_a_gameover")
  # o cualquier otra acción
+
+func _cambiar_a_gameover():
+	get_tree().change_scene_to_file("res://game_over.tscn")
