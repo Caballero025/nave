@@ -3,6 +3,8 @@ extends Node2D
 var score = 0
 @onready var http_score = HTTPRequest.new()
 var score_enviandose = false
+var API_BASE_URL = "https://caballero026.me/api"  # Para producción
+# var API_BASE_URL = "http://localhost:8081/api"  # Para desarrollo
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -21,7 +23,8 @@ func _on_meteoro_destruido():
 		return  # No enviar mientras haya otra petición en proceso
 	score_enviandose = true
 
-	var url = "/api/actualizar_score"
+	var url = API_BASE_URL + "/api/actualizar_score"
+	
 	var datos = {"nombre": Global.usuario, "score": score}
 	var json_body = JSON.stringify(datos)
 	var error = http_score.request(url, ["Content-Type: application/json"], HTTPClient.METHOD_POST, json_body)

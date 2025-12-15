@@ -2,7 +2,8 @@ extends Node2D
 
 @onready var http = $HTTPRequest
 @onready var line_edit = $LineEdit
-
+var API_BASE_URL = "https://caballero026.me/api"  # Para producción
+# var API_BASE_URL = "http://localhost:8081/api"  # Para desarrollo
 # Configuración SIMPLIFICADA - usa siempre ruta relativa
 func _ready():
 	if not http.request_completed.is_connected(_on_http_request_request_completed):
@@ -19,7 +20,7 @@ func enviar_usuario():
 		return
 	
 	# USAR RUTA RELATIVA - Esto funciona en cualquier entorno
-	var url = "/api/guardar_usuario"
+	var url = API_BASE_URL + "/api/guardar_usuario"
 	
 	var datos = {"nombre": usuario}
 	var json_body = JSON.stringify(datos)
