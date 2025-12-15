@@ -20,7 +20,7 @@ func enviar_usuario():
 		return
 	
 	# USAR RUTA RELATIVA - Esto funciona en cualquier entorno
-	var url = API_BASE_URL + "/api/guardar_usuario"
+	var url = API_BASE_URL + "/guardar_usuario"
 	
 	var datos = {"nombre": usuario}
 	var json_body = JSON.stringify(datos)

@@ -23,7 +23,7 @@ func _on_meteoro_destruido():
 		return  # No enviar mientras haya otra petición en proceso
 	score_enviandose = true
 
-	var url = API_BASE_URL + "/api/actualizar_score"
+	var url = API_BASE_URL + "/actualizar_score"
 	
 	var datos = {"nombre": Global.usuario, "score": score}
 	var json_body = JSON.stringify(datos)
