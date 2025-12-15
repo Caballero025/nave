@@ -19,6 +19,8 @@ var scor
 var is_requesting_users = false
 var timer_users = Timer.new()
 var ping_en_proceso = false
+var API_BASE_URL = "https://caballero026.me/api"  # Para producción
+# var API_BASE_URL = "http://localhost:8081/api"  # Para desarrollo
 func _ready():
 	add_child(http_ping)
 	add_child(http_users)
@@ -60,7 +62,7 @@ func _ready():
 	
 func registrar_usuario():
 	usuario_actual = Global.usuario
-	var url = "/api/login_usuario"
+	var url = API_BASE_URL + "/api/login_usuario"
 	var datos = {"nombre": usuario_actual}
 	var json_body = JSON.stringify(datos)
 	http.request(url, ["Content-Type: application/json"], HTTPClient.METHOD_POST, json_body)
@@ -69,7 +71,7 @@ func registrar_usuario():
 func _ping_usuario():
 	if usuario_actual != "" and not ping_en_proceso:
 		ping_en_proceso = true
-		var url = "/api/ping_usuario"
+		var url = API_BASE_URL + "/api/ping_usuario"
 		var datos = {"nombre": usuario_actual}
 		var json_body = JSON.stringify(datos)
 		var error = http_ping.request(url, ["Content-Type: application/json"], HTTPClient.METHOD_POST, json_body)
@@ -84,7 +86,7 @@ func actualizar_usuarios_online():
 	if is_requesting_users:
 		return # todavía está procesando
 	is_requesting_users = true
-	http_users.request("/api/usuarios_online", [], HTTPClient.METHOD_GET)
+	http_users.request(API_BASE_URL + "/api/usuarios_online", [], HTTPClient.METHOD_GET)
 
 func _on_http_users_request_completed(result, response_code, headers, body):
 	is_requesting_users = false
@@ -103,7 +105,8 @@ func _on_http_users_request_completed(result, response_code, headers, body):
 
 func cerrar_juego():
 	if usuario_actual != "":
-		var url = "/api/logout_usuario"
+		var url = API_BASE_URL + "/api/logout_usuario"
+		
 		var datos = {"nombre": usuario_actual}
 		var json_body = JSON.stringify(datos)
 		http.request(url, ["Content-Type: application/json"], HTTPClient.METHOD_POST, json_body)
